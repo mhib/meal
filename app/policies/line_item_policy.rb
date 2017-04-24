@@ -1,9 +1,9 @@
 class LineItemPolicy < ApplicationPolicy
   def create?
-    record.order.line_items.where(user_id: current_user.id).none?
+    record.order.line_items.where(user_id: user.id).none?
   end
 
   def update?
-    record.user == current_user
+    record.user == user
   end
 end

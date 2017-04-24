@@ -35,9 +35,4 @@ class OrdersController < ApplicationController
   def create_params
     params.require(:order).permit(:restaurant)
   end
-
-  def serialize(order)
-    ActiveModelSerializers::SerializableResource
-      .new(order, adapter: :json_api).as_json
-  end
 end

@@ -4,3 +4,10 @@ export const createOrder = (order) => {
     order: order
   }
 }
+
+export const createLineItem = (lineItem) => {
+  return {
+    type: 'CREATED_LINE_ITEM',
+    lineItem: lineItem
+  }
+}

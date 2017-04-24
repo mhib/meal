@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :provider, presence: true
 
   has_many :orders, foreign_key: :owner_id
+  has_many :line_items
 
   def self.find_or_create_by_oauth(auth)
     if (found = where(provider: auth[:provider], uid: auth[:uid]).first)
