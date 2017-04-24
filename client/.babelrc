@@ -1,0 +1,25 @@
+{
+  "presets": [
+    "es2015",
+    "stage-0",
+    "react"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "cable": "./app/cable",
+          "app": "./app",
+          "test": "./test",
+          "components": "./app/components",
+          "helpers": "./app/helpers",
+          "schemas": "./app/proptypes/schemas",
+          "proptypes": "./app/proptypes",
+          "sources": "./app/sources",
+          "models": "./app/models"
+        }
+      }
+    ]
+  ]
+}

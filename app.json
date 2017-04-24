@@ -1,0 +1,78 @@
+{
+  "name": "meal",
+  "scripts": {
+  },
+  "env": {
+    "APPLICATION_OWNER": {
+      "required": true
+    },
+    "MEAL_DATABASE": {
+      "required": true
+    },
+    "MEAL_DATABASE_PASSWORD": {
+      "required": true
+    },
+    "MEAL_DATABASE_USER": {
+      "required": true
+    },
+    "DEPLOY_TASKS": {
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+    "HOSTNAME": {
+      "required": true
+    },
+    "LANG": {
+      "required": true
+    },
+    "NOTIFICATION_HOST": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_LOG_TO_STDOUT": {
+      "required": true
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "REDIS_PROVIDER": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "required": true
+    },
+    "TZ": {
+      "required": true
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1
+    },
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "heroku-redis"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/ruby"
+    },
+    {
+      "url": "https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks"
+    }
+  ]
+}
