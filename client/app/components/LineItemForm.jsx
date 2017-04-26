@@ -20,7 +20,7 @@ export default class LineItemForm extends React.Component {
   }
 
   handleCostChange(e) {
-    this.setState({ cost: e.target.value });
+    this.setState({ cost: (+e.target.value).toFixed(2) });
   }
 
 

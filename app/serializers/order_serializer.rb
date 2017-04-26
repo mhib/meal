@@ -1,5 +1,9 @@
 class OrderSerializer < ActiveModel::Serializer
-  attributes :restaurant, :owner, :status, :id
+  attributes :restaurant, :owner, :status, :id, :line_items
 
-  has_many :line_items, serializer: LineItemSerializer
+  def line_items
+   object.line_items.map do |line_item|
+      LineItemSerializer.new(line_item)
+    end
+  end
 end

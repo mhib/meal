@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
     redirect_to sign_in_path unless signed_in?
   end
 
-  def serialize(order)
+  def serialize(order, adapter=:json_api)
     ActiveModelSerializers::SerializableResource
-      .new(order, adapter: :json_api).as_json
+      .new(order, adapter: adapter).as_json
   end
 end

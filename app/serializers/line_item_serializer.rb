@@ -1,3 +1,3 @@
 class LineItemSerializer < ActiveModel::Serializer
-  attributes :user, :name, :cost, :order_id
+  attributes :id, :user, :name, :cost, :order_id
 end

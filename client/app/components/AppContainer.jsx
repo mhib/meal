@@ -21,8 +21,11 @@ export default class AppContainer extends React.Component {
     switch (params.type) {
       case 'created_order':
         this.store.dispatch(createOrder(params.order.data));
+        break;
       case 'created_line_item':
-        this.store.dispatch(createLineItem(params.line_item.data));
+        console.log(params);
+        this.store.dispatch(createLineItem(params.line_item));
+        break;
     }
   }
 

@@ -26,7 +26,7 @@ export default class Order extends React.Component {
         {this.props.order.attributes.restaurant} by
         {this.props.order.attributes.owner.id == this.props.currentUser.id ? ' You' : ` ${this.props.order.attributes.owner.name}`}
       </div>
-      <OrderModal showModal={this.state.showModal} order={this.props.order} closeModal={this.hideModal} />
+      <OrderModal showModal={this.state.showModal} order={this.props.order} closeModal={this.hideModal} currentUser={this.props.currentUser}/>
       </li>
     )
   }

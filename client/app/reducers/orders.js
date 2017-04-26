@@ -6,8 +6,8 @@ const orders = (state = defaultState, action) => {
       return [action.order].concat(state)
     case 'CREATED_LINE_ITEM':
       let newState = cloneDeep(state);
-      let order = newState.find((elem) => +elem.id === +action.lineItem.attributes['order-id'])
-      order.relationships['line-items'].data.push(action.lineItem);
+      let order = newState.find((elem) => +elem.id === +action.lineItem['order_id'])
+      order.attributes['line-items'].push(action.lineItem);
       return newState;
     default:
       return state

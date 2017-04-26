@@ -3,10 +3,9 @@ class LineItemsController < ApplicationController
     @line_item = current_user.line_items.new(line_item_params)
     authorize(@line_item)
     if @line_item.save
-      ActionCable.server.broadcast('orders:orders', { type: 'created_line_item',
-                                  line_item: serialize(@line_item) })
+      ActionCable.server.broadcast('orders:orders', serialize(@line_item, :json).tap { |r| r[:type] = 'created_line_item' })
       respond_to do |format|
-        format.json { render(json: @line_item, adapter: :json) }
+        format.json { render(json: @line_item) }
       end
     else
       respond_to do |format|
