@@ -15,14 +15,15 @@ const getCSRFToken = (config) => {
 
 axios.interceptors.request.use(getCSRFToken, (error) => Promise.reject(error));
 
-export const createOrder = function(restaurant) {
-  return axios.post(ORDERS_PATH, {order: { restaurant: restaurant } });
-}
+export const createOrder = (restaurant) => (
+  axios.post(ORDERS_PATH, { order: { restaurant: restaurant } })
+);
 
-export const createLineItem = function({ cost, name }, orderId) {
-  return axios.post(LINE_ITEMS_PATH, {line_item: { cost: cost * 100, name: name, order_id: orderId }});
-}
+export const createLineItem = ({ cost, name }, orderId) => (
+  axios.post(LINE_ITEMS_PATH,
+    { line_item: { cost: cost * 100, name, order_id: orderId } })
+);
 
-export const getArchivedOrdersPage = function(page) {
-  return axios.get(`/archived_orders/${page}.json`)
-}
+export const getArchivedOrdersPage = (page) => (
+  axios.get(`/archived_orders/${page}.json`)
+);

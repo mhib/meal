@@ -1,22 +1,17 @@
-import { connect } from 'react-redux'
-import OrdersList from '../components/OrdersList'
+import { connect } from 'react-redux';
+import OrdersList from '../components/OrdersList';
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) => (
+  {
     orders: state.orders
   }
-}
+);
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onCreateLineItem: (arg) => {
-      console.log(arg);
-    },
-    onChangeState: (arg) => {
-      console.log(arg);
-    }
+const mapDispatchToProps = (dispatch) => (
+  {
+    onChangeState: (arg) => {}
   }
-}
+);
 
 const TodayOrders = connect(
   mapStateToProps,

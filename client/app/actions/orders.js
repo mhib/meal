@@ -1,13 +1,13 @@
-export const createOrder = (order) => {
-  return {
+export const createOrder = (order) => (
+  {
     type: 'CREATED_ORDER',
-    order: order
+    order
   }
-}
+);
 
-export const createLineItem = (lineItem) => {
-  return {
+export const createLineItem = (lineItem) => (
+  {
     type: 'CREATED_LINE_ITEM',
-    lineItem: lineItem
+    lineItem
   }
-}
+);

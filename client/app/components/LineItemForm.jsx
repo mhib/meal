@@ -1,13 +1,18 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import ReactDOM from 'react-dom';
-import { createLineItem } from '../actions/api';
+import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import bindAll from 'lodash/bindAll';
+import PropTypes from 'prop-types';
+import { createLineItem } from '../actions/api';
+
 const INITIAL_STATE = {
   name: '',
   cost: 0.00
 };
+
 export default class LineItemForm extends React.Component {
+  static propTypes = {
+    order: PropTypes.object
+  };
 
   constructor(props) {
     super(props);
@@ -27,15 +32,15 @@ export default class LineItemForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     createLineItem(this.state, this.props.order.id);
+    this.form.reset();
     this.setState(INITIAL_STATE);
-    ReactDOM.findDOMNode(this.refs.nameInput).value = '';
   }
 
   render() {
-    return(
+    return (
       <div>
         <h2>Create new order</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} ref={(node) => this.form = node}>
           <FormGroup>
             <FormControl
             type="text"
@@ -43,8 +48,7 @@ export default class LineItemForm extends React.Component {
             required="true"
             maxLength="255"
             onChange={this.handleNameChange}
-            placeholder="name"
-            ref="nameInput" />
+            placeholder="name" />
           </FormGroup>
           <FormGroup>
             <FormControl
@@ -55,14 +59,13 @@ export default class LineItemForm extends React.Component {
             step="any"
             value={this.state.cost}
             onChange={this.handleCostChange}
-            placeholder="Cost"
-            ref="costInput" />
+            placeholder="Cost" />
           </FormGroup>
           <Button bsStyle="primary" type="submit" disabled={!(this.state.name && this.state.cost)}>
             Create order
           </Button>
         </form>
       </div>
-    )
+    );
   }
 }

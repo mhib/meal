@@ -1,6 +1,7 @@
 import React from 'react';
 import Order from './Order';
-import './OrdersList.scss'
+import PropTypes from 'prop-types';
+import './OrdersList.scss';
 
 const OrdersList = ({ orders, onChangeStatus, onCreateLineItem, currentUser, archived }) => (
   <ul className="ordersList">
@@ -11,10 +12,19 @@ const OrdersList = ({ orders, onChangeStatus, onCreateLineItem, currentUser, arc
         currentUser={currentUser}
         onChangestatus={() => onChangeStatus(order.id)}
         onCreateLineItem={() => onCreateLineItem(order.id)}
-        archived={archived}
-      />
+        archived={archived} />
     )}
   </ul>
-)
+);
+
+OrdersList.defaultProps = {
+  archived: false
+};
+
+OrdersList.propTypes = {
+  orders: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  archived: PropTypes.bool
+};
 
 export default OrdersList;
