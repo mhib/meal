@@ -5,7 +5,7 @@ import TodayOrders from '../containers/TodayOrders';
 import ArchivedOrders from '../components/ArchivedOrders';
 import { UserShape, OrderShape } from './shapes';
 
-const App = ({ currentUser, archived, archivedPageCount }) => (
+const App = ({ currentUser, archivedOrders, archivedPageCount }) => (
   <div className="row">
     <div className="col-md-12">
       <div className="row">
@@ -14,13 +14,13 @@ const App = ({ currentUser, archived, archivedPageCount }) => (
         </div>
       </div>
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-12" id="today-orders">
           <TodayOrders currentUser={currentUser} />
         </div>
       </div>
       <div className="row">
         <div className="col-md-12">
-          <ArchivedOrders orders={archived} pageCount={archivedPageCount} currentUser={currentUser} />
+          <ArchivedOrders orders={archivedOrders} pageCount={archivedPageCount} currentUser={currentUser} />
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@ const App = ({ currentUser, archived, archivedPageCount }) => (
 
 App.propTypes = {
   currentUser: UserShape.isRequired,
-  archived: PropTypes.arrayOf(OrderShape).isRequired,
+  archivedOrders: PropTypes.arrayOf(OrderShape).isRequired,
   archivedPageCount: PropTypes.number.isRequired
 };
 

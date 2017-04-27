@@ -2,11 +2,7 @@ import PropTypes from 'prop-types';
 
 export const UserShape = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  uid: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
+  name: PropTypes.string.isRequired
 });
 
 export const LineItemShape = PropTypes.shape({
@@ -26,6 +22,6 @@ export const OrderShape = PropTypes.shape({
     status: PropTypes.string.isRequired,
     restaurant: PropTypes.string.isRequired,
     owner: UserShape,
-    LineItems: PropTypes.arrayOf(LineItemShape)
+    'line-items': PropTypes.arrayOf(LineItemShape).isRequired
   })
 });

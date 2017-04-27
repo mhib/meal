@@ -36,13 +36,15 @@ export default class OrderModal extends React.Component {
   }
 
   shouldRenderForm(props = this.props) {
-    return !this.props.archived && !(props.order.attributes['line-items'].some(
-      (elem) => +elem.user.id === +props.currentUser.id
-    ));
+    return props.order.attributes.status === 'open' &&
+      !props.archived &&
+      !(props.order.attributes['line-items'].some(
+        (elem) => +elem.user.id === +props.currentUser.id
+      ));
   }
 
   sumOfLineItems(lineItems = this.props.order.attributes['line-items']) {
-    return lineItems.reduce((mem, li) => mem + (li.cost / 100), 0).toFixed(2);
+    return (lineItems.reduce((mem, li) => mem + li.cost, 0) / 100).toFixed(2);
   }
 
   render() {

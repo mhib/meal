@@ -3,30 +3,27 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
-import OrderFactory from 'test/factories/Order'
 
-describe('<LineItemForm />', () => {
+describe('<OrderForm />', () => {
   const createSpy = sinon.spy();
-  const LineItemForm = proxyquire.noCallThru().load('../../app/components/LineItemForm', {
+  const OrderForm = proxyquire.noCallThru().load('../../app/components/OrderForm', {
     '../actions/api': {
-      createLineItem: createSpy
+      createOrder: createSpy
     }
   }).default;
-  const order = OrderFactory.build();
-  const wrapper = mount(<LineItemForm order={order} />);
+  const wrapper = mount(<OrderForm />);
 
-  it('renders form', () => {
+  it('renders from', () => {
     expect(wrapper).to.have.exactly(1).descendants('form');
   });
 
-  it('renders 2 inputs', () => {
-    expect(wrapper.find('form')).to.have.exactly(2).descendants('input');
+  it('renders 1 input', () => {
+    expect(wrapper.find('form')).to.have.exactly(1).descendants('input');
   });
 
   describe('Sending create request', () => {
     const state = {
-      name: 'asdf',
-      cost: 3.14
+      restaurant: 'asdf',
     };
     before(() => {
       wrapper.setState(state);
@@ -35,7 +32,7 @@ describe('<LineItemForm />', () => {
 
     it('sends request', () => {
       expect(createSpy).to.have.been.calledOnce();
-      expect(createSpy).to.have.been.calledWithMatch(state, order.id);
+      expect(createSpy).to.have.been.calledWith(state.restaurant);
     });
   });
 });
