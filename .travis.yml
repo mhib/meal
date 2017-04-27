@@ -1,0 +1,19 @@
+sudo: false
+language: ruby
+
+cache:
+  bundler: true
+  directories:
+    - client/node_modules
+rvm:
+  - 2.4.1
+before_script:
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+before_install:
+  - nvm install v5.10.0
+install:
+  - bundle install --jobs=3 --retry=3 --deployment --path=${BUNDLE_PATH:-vendor/bundle}
+  - npm install
+script:
+- bundle exec rake test:all

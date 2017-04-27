@@ -27,7 +27,7 @@ describe('<LineItemForm />', () => {
       wrapper.find('form').simulate('submit');
     });
 
-    it('invokes onSuccess callback', () => {
+    it('sends request', () => {
       expect(createSpy).to.have.been.calledOnce();
       expect(createSpy).to.have.been.calledWithMatch(state, 13);
     });
