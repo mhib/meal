@@ -1,12 +1,14 @@
 import React from 'react';
 import bindAll from 'lodash/bindAll';
+import PropTypes from 'prop-types';
 import OrderModal from './OrderModal';
 import { OrderShape, UserShape } from './shapes';
 
 export default class Order extends React.Component {
   static propTypes = {
     order: OrderShape.isRequired,
-    currentUser: UserShape.isRequired
+    currentUser: UserShape.isRequired,
+    archived: PropTypes.bool.isRequired
   };
 
   constructor(props) {
@@ -38,7 +40,8 @@ export default class Order extends React.Component {
         <OrderModal showModal={this.state.showModal}
                     order={this.props.order}
                     closeModal={this.hideModal}
-                    currentUser={this.props.currentUser} />
+                    currentUser={this.props.currentUser}
+                    archived={this.props.archived} />
       </li>
     );
   }

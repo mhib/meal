@@ -5,12 +5,14 @@ import PropTypes from 'prop-types';
 import LineItemForm from './LineItemForm';
 import LineItem from './LineItem';
 import { OrderShape } from './shapes';
+import './OrderModal.scss';
 
 export default class OrderModal extends React.Component {
   static propTypes = {
     order: OrderShape.isRequired,
     closeModal: PropTypes.func.isRequired,
-    showModal: PropTypes.bool.isRequired
+    showModal: PropTypes.bool.isRequired,
+    archived: PropTypes.bool.isRequired
   }
 
   constructor(props) {
@@ -34,7 +36,7 @@ export default class OrderModal extends React.Component {
   }
 
   shouldRenderForm(props = this.props) {
-    return !(props.order.attributes['line-items'].some(
+    return !this.props.archived && !(props.order.attributes['line-items'].some(
       (elem) => +elem.user.id === +props.currentUser.id
     ));
   }
@@ -51,10 +53,10 @@ export default class OrderModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           {this.props.order.attributes['line-items'].map(li =>
-            <span key={li.id}>{li.id}</span>
+            <LineItem lineItem={li} key={li.id} />
           )}
-          <p>
-            Sum: {this.state.sumOfItems}
+          <p className="sum-of-costs">
+            Sum: {this.state.sumOfItems} PLN
           </p>
           {this.state.showForm && <LineItemForm order={this.props.order} show={this.shouldRenderForm()} />}
         </Modal.Body>

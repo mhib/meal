@@ -36,15 +36,17 @@ export default class ArchivedOrders extends React.Component {
       <div>
         <h2>Archived orders</h2>
         <OrdersList orders={this.state.orders} archived currentUser={this.props.currentUser} />
-        <ReactPaginate pageCount={this.state.pageCount}
-                       marginPagesDisplayed={2}
-                       pageRangeDisplayed={5}
-                       onPageChange={this.getPage}
-                       breakLabel={<a>...</a>}
-                       breakClassName={'break-me'}
-                       containerClassName={'pagination'}
-                       subContainerClassName={'pages pagination'}
-                       activeClassName={'active'} />
+        <div className="text-center">
+          <ReactPaginate pageCount={this.state.pageCount}
+                         marginPagesDisplayed={2}
+                         pageRangeDisplayed={5}
+                         onPageChange={this.getPage}
+                         breakLabel={<a>...</a>}
+                         breakClassName={'break-me'}
+                         containerClassName={'pagination'}
+                         subContainerClassName={'pages pagination'}
+                         activeClassName={'active'} />
+        </div>
       </div>
     );
   }

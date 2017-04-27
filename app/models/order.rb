@@ -11,4 +11,6 @@ class Order < ApplicationRecord
 
   scope :today, -> { where('created_at >= ?', Time.zone.now.beginning_of_day) }
   scope :not_today, -> { where('created_at < ?', Time.zone.now.beginning_of_day) }
+
+  paginates_per 5
 end
