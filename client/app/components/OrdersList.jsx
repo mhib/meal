@@ -1,7 +1,8 @@
 import React from 'react';
-import Order from './Order';
 import PropTypes from 'prop-types';
+import Order from './Order';
 import './OrdersList.scss';
+import { UserShape, OrderShape } from './shapes';
 
 const OrdersList = ({ orders, onChangeStatus, onCreateLineItem, currentUser, archived }) => (
   <ul className="ordersList">
@@ -22,8 +23,8 @@ OrdersList.defaultProps = {
 };
 
 OrdersList.propTypes = {
-  orders: PropTypes.array.isRequired,
-  currentUser: PropTypes.object.isRequired,
+  orders: PropTypes.arrayOf(OrderShape).isRequired,
+  currentUser: UserShape.isRequired,
   archived: PropTypes.bool
 };
 

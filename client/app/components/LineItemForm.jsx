@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import bindAll from 'lodash/bindAll';
-import PropTypes from 'prop-types';
 import { createLineItem } from '../actions/api';
+import { OrderShape } from './shapes';
 
 const INITIAL_STATE = {
   name: '',
@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 
 export default class LineItemForm extends React.Component {
   static propTypes = {
-    order: PropTypes.object
+    order: OrderShape.isRequired
   };
 
   constructor(props) {

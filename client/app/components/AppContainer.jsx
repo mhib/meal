@@ -6,12 +6,13 @@ import { ORDERS_CHANNEL, createSubscription } from '../cable';
 import { createOrder, createLineItem } from '../actions/orders';
 import mealApp from '../reducers/index';
 import App from './App';
+import { UserShape, OrderShape } from './shapes';
 
 export default class AppContainer extends React.Component {
   static propTypes = {
-    current_user: PropTypes.object.isRequired,
-    archived: PropTypes.array.isRequired,
-    today: PropTypes.array.isRequired,
+    current_user: UserShape.isRequired,
+    archived: PropTypes.arrayOf(OrderShape).isRequired,
+    today: PropTypes.arrayOf(OrderShape).isRequired,
     archived_page_count: PropTypes.number.isRequired
   };
 

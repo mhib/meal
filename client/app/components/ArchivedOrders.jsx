@@ -3,11 +3,12 @@ import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import OrdersList from './OrdersList';
 import { getArchivedOrdersPage } from '../actions/api';
+import { UserShape, OrderShape } from './shapes';
 
 export default class ArchivedOrders extends React.Component {
   static propTypes = {
-    currentUser: PropTypes.object.isRequired,
-    orders: PropTypes.array.isRequired,
+    currentUser: UserShape.isRequired,
+    orders: PropTypes.arrayOf(OrderShape).isRequired,
     pageCount: PropTypes.number.isRequired
   };
 

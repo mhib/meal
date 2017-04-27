@@ -4,10 +4,11 @@ import bindAll from 'lodash/bindAll';
 import PropTypes from 'prop-types';
 import LineItemForm from './LineItemForm';
 import LineItem from './LineItem';
+import { OrderShape } from './shapes';
 
 export default class OrderModal extends React.Component {
   static propTypes = {
-    order: PropTypes.object.isRequired,
+    order: OrderShape.isRequired,
     closeModal: PropTypes.func.isRequired,
     showModal: PropTypes.bool.isRequired
   }

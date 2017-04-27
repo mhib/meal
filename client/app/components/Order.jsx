@@ -1,12 +1,12 @@
 import React from 'react';
 import bindAll from 'lodash/bindAll';
-import PropTypes from 'prop-types';
 import OrderModal from './OrderModal';
+import { OrderShape, UserShape } from './shapes';
 
 export default class Order extends React.Component {
   static propTypes = {
-    order: PropTypes.object,
-    currentUser: PropTypes.object
+    order: OrderShape.isRequired,
+    currentUser: UserShape.isRequired
   };
 
   constructor(props) {
@@ -28,7 +28,7 @@ export default class Order extends React.Component {
 
   render() {
     return (
-      <li className="panel panel-default" onClick={this.showModal}>
+      <li className="panel panel-default" role="button" onClick={this.showModal}>
         <div className="panel-body">
           {this.props.order.attributes.restaurant} by
           {+this.props.order.attributes.owner.id === +this.props.currentUser.id ?

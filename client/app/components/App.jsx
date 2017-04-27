@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import OrderForm from './OrderForm';
 import TodayOrders from '../containers/TodayOrders';
 import ArchivedOrders from '../components/ArchivedOrders';
+import { UserShape, OrderShape } from './shapes';
 
 const App = ({ currentUser, archived, archivedPageCount }) => (
   <div className="row">
@@ -27,8 +28,8 @@ const App = ({ currentUser, archived, archivedPageCount }) => (
 );
 
 App.propTypes = {
-  currentUser: PropTypes.object.isRequired,
-  archived: PropTypes.array.isRequired,
+  currentUser: UserShape.isRequired,
+  archived: PropTypes.arrayOf(OrderShape).isRequired,
   archivedPageCount: PropTypes.number.isRequired
 };
 
