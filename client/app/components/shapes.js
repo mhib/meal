@@ -14,14 +14,9 @@ export const LineItemShape = PropTypes.shape({
 });
 
 export const OrderShape = PropTypes.shape({
-  id: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
-  attributes: PropTypes.shape({
-    status: PropTypes.string.isRequired,
-    restaurant: PropTypes.string.isRequired,
-    owner: UserShape,
-    'line-items': PropTypes.arrayOf(LineItemShape).isRequired
-  })
+  id: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
+  restaurant: PropTypes.string.isRequired,
+  owner: UserShape,
+  line_items: PropTypes.arrayOf(LineItemShape).isRequired
 });

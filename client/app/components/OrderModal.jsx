@@ -27,7 +27,7 @@ export default class OrderModal extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       showForm: this.shouldRenderForm(nextProps),
-      sumOfItems: this.sumOfLineItems(nextProps.order.attributes['line-items'])
+      sumOfItems: this.sumOfLineItems(nextProps.order.line_items)
     });
   }
 
@@ -36,14 +36,14 @@ export default class OrderModal extends React.Component {
   }
 
   shouldRenderForm(props = this.props) {
-    return props.order.attributes.status === 'open' &&
+    return props.order.status === 'open' &&
       !props.archived &&
-      !(props.order.attributes['line-items'].some(
+      !(props.order.line_items.some(
         (elem) => +elem.user.id === +props.currentUser.id
       ));
   }
 
-  sumOfLineItems(lineItems = this.props.order.attributes['line-items']) {
+  sumOfLineItems(lineItems = this.props.order.line_items) {
     return (lineItems.reduce((mem, li) => mem + li.cost, 0) / 100).toFixed(2);
   }
 
@@ -51,10 +51,10 @@ export default class OrderModal extends React.Component {
     return (
       <Modal show={this.props.showModal} onHide={this.handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{this.props.order.attributes.restaurant}</Modal.Title>
+          <Modal.Title>{this.props.order.restaurant}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {this.props.order.attributes['line-items'].map(li =>
+          {this.props.order.line_items.map(li =>
             <LineItem lineItem={li} key={li.id} />
           )}
           <p className="sum-of-costs">

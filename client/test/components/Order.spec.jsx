@@ -15,15 +15,15 @@ describe('<Order />', () => {
 
   it('renders li', () => {
     expect(shallowWrapper).to.have.exactly(1).descendants('li');
-    expect(shallowWrapper.text()).to.include(order.attributes.restaurant);
-    expect(shallowWrapper.text()).to.include(`${order.attributes.owner.name}`);
+    expect(shallowWrapper.text()).to.include(order.restaurant);
+    expect(shallowWrapper.text()).to.include(`${order.owner.name}`);
   });
 
   describe('created by current user', () => {
-    const altWrapper = shallow(<Order order={order} currentUser={order.attributes.owner} archived={false} />);
+    const altWrapper = shallow(<Order order={order} currentUser={order.owner} archived={false} />);
 
     it("does not render user's name", () => {
-      expect(altWrapper.text()).not.to.include(`${order.attributes.owner.name}`);
+      expect(altWrapper.text()).not.to.include(`${order.owner.name}`);
       expect(altWrapper.text()).to.include('You');
     });
   });

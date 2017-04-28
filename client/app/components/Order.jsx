@@ -32,10 +32,10 @@ export default class Order extends React.Component {
     return (
       <li className="panel panel-default" role="button" onClick={this.showModal}>
         <div className="panel-body">
-          {this.props.order.attributes.restaurant} by
-          {+this.props.order.attributes.owner.id === +this.props.currentUser.id ?
+          {this.props.order.restaurant} by
+          {+this.props.order.owner.id === +this.props.currentUser.id ?
               ' You' :
-              ` ${this.props.order.attributes.owner.name}`}
+              ` ${this.props.order.owner.name}`}
         </div>
         <OrderModal showModal={this.state.showModal}
                     order={this.props.order}

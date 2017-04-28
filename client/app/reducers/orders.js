@@ -1,11 +1,11 @@
-import cloneDeep from 'lodash/cloneDeep';
+import clone from 'lodash/clone';
 
 const defaultState = [];
 
 const addLineItem = (state, action) => {
-  const newState = cloneDeep(state);
-  const order = newState.find((elem) => +elem.id === +action.lineItem.order_id);
-  order.attributes['line-items'].push(action.lineItem);
+  const newState = clone(state);
+  const order = newState.find((elem) => elem.id === action.lineItem.order_id);
+  order.line_items.push(action.lineItem);
   return newState;
 };
 

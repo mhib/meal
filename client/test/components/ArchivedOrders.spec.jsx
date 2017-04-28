@@ -13,7 +13,7 @@ describe('<ArchivedOrders />', () => {
     return {
       then: (func) => {
         const order = cloneDeep(OrderFactory.build());
-        order.attributes.restaurant = 'Unique name';
+        order.restaurant = 'Unique name';
         return func({
           data: {
             orders: [order],

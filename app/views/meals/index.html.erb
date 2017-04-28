@@ -3,8 +3,8 @@
   <%= link_to "Wyloguj", sign_out_path %>
 <% end %>
 <%= react_component 'AppContainer', props: {
-  today: @today_orders_json[:data],
-  archived: @not_today_orders_json[:data],
+  today: @today_orders_json,
+  archived: @not_today_orders_json,
   archived_page_count: @not_today_orders.total_pages,
   current_user: current_user
 } %>

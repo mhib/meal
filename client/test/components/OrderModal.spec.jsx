@@ -20,8 +20,8 @@ describe('<OrderModal />', () => {
 
   describe('archived', () => {
     const otherOrder = OrderFactory.build();
-    otherOrder.attributes['line-items'] = [];
-    otherOrder.attributes['status'] = 'open';
+    otherOrder.line_items = [];
+    otherOrder.status = 'open';
     const wrapper = mount(<OrderModal showModal archived order={otherOrder} currentUser={user} closeModal={() => {}} />);
 
     it('does not render form', () => {
@@ -31,8 +31,8 @@ describe('<OrderModal />', () => {
 
   describe('user already has line item', () => {
     const otherOrder = OrderFactory.build();
-    otherOrder.attributes['status'] = 'open';
-    otherOrder.attributes['line-items'] = [LineItemFactory.build(user: user)];
+    otherOrder.status = 'open';
+    otherOrder.line_items = [LineItemFactory.build(user: user)];
     const wrapper = mount(<OrderModal showModal archived={false} order={otherOrder} currentUser={user} closeModal={() => {}} />);
     it('does not render form', () => {
       expect(wrapper).not.to.have.descendants('LineItemForm');
@@ -41,8 +41,8 @@ describe('<OrderModal />', () => {
 
   describe('status not open', () => {
     const otherOrder = OrderFactory.build();
-    otherOrder.attributes['status'] = 'ordered';
-    otherOrder.attributes['line-items'] = [];
+    otherOrder.status = 'ordered';
+    otherOrder.line_items = [];
     const wrapper = mount(<OrderModal showModal archived={false} order={otherOrder} currentUser={user} closeModal={() => {}} />);
 
     it('does not render form', () => {
@@ -52,8 +52,8 @@ describe('<OrderModal />', () => {
 
   describe('user is able to add line item', () => {
     const otherOrder = OrderFactory.build();
-    otherOrder.attributes['line-items'] = [];
-    otherOrder.attributes.status = 'open';
+    otherOrder.line_items = [];
+    otherOrder.status = 'open';
     const wrapper = shallow(<OrderModal showModal archived={false} order={otherOrder} currentUser={user} closeModal={() => {}} />);
 
     it('does render form', () => {

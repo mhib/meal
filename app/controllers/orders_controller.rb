@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
       ActionCable.server.broadcast('orders:orders', { type: 'created_order',
                                   order: serialize(@order) })
       respond_to do |format|
-        format.json { render(json: @order, adapter: :json) }
+        format.json { render(json: @order) }
       end
     else
       respond_to do |format|
@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
     @not_today_orders_json = serialize(@not_today_orders.to_a)
     respond_to do |format|
       format.json do
-        render json: { orders: @not_today_orders_json[:data], page_count: @not_today_orders.total_pages }
+        render json: { orders: @not_today_orders_json, page_count: @not_today_orders.total_pages }
       end
     end
   end

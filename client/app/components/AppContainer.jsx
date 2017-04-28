@@ -29,7 +29,7 @@ export default class AppContainer extends React.Component {
   handleWebSocketStream(params) {
     switch (params.type) {
       case 'created_order':
-        this.store.dispatch(createOrder(params.order.data));
+        this.store.dispatch(createOrder(params.order));
         break;
       case 'created_line_item':
         this.store.dispatch(createLineItem(params.line_item));

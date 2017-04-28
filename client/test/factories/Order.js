@@ -3,12 +3,10 @@ import UserFactory from './User';
 import LineItemFactory from './LineItem'
 
 export default new Factory()
-  .sequence('id', (i) => `${i}`)
+  .sequence('id')
   .attrs({
-    attributes: {
-      status: 'open',
-      restaurant: 'Restaurant name',
-      owner: UserFactory.build(),
-      'line-items': [LineItemFactory.build()]
-    }
+    status: 'open',
+    restaurant: 'Restaurant name',
+    owner: UserFactory.build(),
+    line_items: [LineItemFactory.build()]
   });
