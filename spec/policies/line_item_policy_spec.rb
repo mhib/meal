@@ -1,28 +1,39 @@
 require 'rails_helper'
 
 RSpec.describe LineItemPolicy do
-
-  let(:user) { User.new }
-
   subject { described_class }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
   permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    context 'current_user' do
+      let(:user) { build(:user) }
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
+      it 'grants access' do
+        expect(subject).to permit(user, nil)
+      end
+    end
+
+    context 'no current user' do
+      it 'denies access' do
+        expect(subject).not_to permit(nil, nil)
+      end
+    end
   end
 
   permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    context 'owner' do
+      let(:line_item) { create(:line_item) }
+      it 'grants access' do
+        expect(subject).to permit(line_item.user, line_item)
+      end
+    end
+
+    context 'not an owner' do
+      let(:line_item) { create(:line_item) }
+      let(:other_user) { create(:user) }
+
+      it 'denies access' do
+        expect(subject).not_to permit(other_user, line_item)
+      end
+    end
   end
 end

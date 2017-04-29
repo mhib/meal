@@ -31,7 +31,9 @@ export default class LineItemForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    createLineItem(this.state, this.props.order.id);
+    let { cost, name } = this.state;
+    cost *= 100;
+    createLineItem({ cost, name }, this.props.order.id);
     this.form.reset();
     this.setState(INITIAL_STATE);
   }

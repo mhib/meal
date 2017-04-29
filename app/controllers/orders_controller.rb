@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
     @order.owner = current_user
     if @order.save
       ActionCable.server.broadcast('orders:orders', { type: 'created_order',
-                                  order: serialize(@order) })
+                                                      order: serialize(@order) })
       respond_to do |format|
         format.json { render(json: @order) }
       end
@@ -17,6 +17,15 @@ class OrdersController < ApplicationController
   end
 
   def update
+    @order = Order.find(update_params[:id])
+    authorize(@order)
+    if @order.update(update_params)
+      ActionCable.server.broadcast('orders:orders', { type: 'changed_order_status',
+                                                      order: serialize(@order) })
+      respond_to do |format|
+        format.json { render(json: @order) }
+      end
+    end
   end
 
   def archived_page
@@ -34,5 +43,9 @@ class OrdersController < ApplicationController
 
   def create_params
     params.require(:order).permit(:restaurant)
+  end
+
+  def update_params
+    params.require(:order).permit(:status, :id)
   end
 end

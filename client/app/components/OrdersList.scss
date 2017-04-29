@@ -1,7 +1,26 @@
-ul.ordersList {
+.orders-list {
   margin: 10px 0;
-  list-style-type: none;
   padding-left: 0;
+}
+
+.orders-list .open {
+  background-color: lime;
+}
+
+.orders-list .finalized {
+  background-color: blue;
+}
+
+.orders-list .ordered {
+  background-color: orange;
+}
+
+.orders-list .delivered {
+  background-color: green;
+}
+
+.orders-list .archived {
+  background-color: gray;
 }
 
 ul.pagination li {

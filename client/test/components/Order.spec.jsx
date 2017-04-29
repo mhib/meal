@@ -13,8 +13,8 @@ describe('<Order />', () => {
   const user = UserFactory.build();
   const shallowWrapper = shallow(<Order order={order} currentUser={user} archived={false} />);
 
-  it('renders li', () => {
-    expect(shallowWrapper).to.have.exactly(1).descendants('li');
+  it('renders order', () => {
+    expect(shallowWrapper).to.have.exactly(1).descendants('.order-list-item');
     expect(shallowWrapper.text()).to.include(order.restaurant);
     expect(shallowWrapper.text()).to.include(`${order.owner.name}`);
   });

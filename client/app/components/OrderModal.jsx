@@ -5,7 +5,11 @@ import PropTypes from 'prop-types';
 import LineItemForm from './LineItemForm';
 import LineItem from './LineItem';
 import { OrderShape } from './shapes';
+import ChangeOrderStatusLink from './ChangeOrderStatusLink';
+import OrderStatus from './OrderStatus';
 import './OrderModal.scss';
+
+const STATUSES = ['open', 'finalized', 'ordered', 'delivered'];
 
 export default class OrderModal extends React.Component {
   static propTypes = {
@@ -19,20 +23,26 @@ export default class OrderModal extends React.Component {
     super(props);
     this.state = {
       showForm: this.shouldRenderForm(),
-      sumOfItems: this.sumOfLineItems()
+      sumOfItems: this.sumOfLineItems(),
+      updatingStatus: false
     };
-    bindAll(this, ['handleClose']);
+    bindAll(this, ['handleClose', 'setUpdating']);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       showForm: this.shouldRenderForm(nextProps),
-      sumOfItems: this.sumOfLineItems(nextProps.order.line_items)
+      sumOfItems: this.sumOfLineItems(nextProps.order.line_items),
+      updating: false
     });
   }
 
   handleClose() {
     this.props.closeModal();
+  }
+
+  setUpdating() {
+    this.setState({ updating: true });
   }
 
   shouldRenderForm(props = this.props) {
@@ -52,8 +62,21 @@ export default class OrderModal extends React.Component {
       <Modal show={this.props.showModal} onHide={this.handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{this.props.order.restaurant}</Modal.Title>
+          <OrderStatus status={this.props.order.status} archived={this.props.archived} />
+          {
+            !this.props.archived &&
+            (this.state.updating ? '...' :
+            STATUSES.filter((s) => s !== this.props.order.status).map((status) =>
+              <span key={status}>
+                <ChangeOrderStatusLink order={this.props.order}
+                                       status={status}
+                                       handleClick={this.setUpdating} />, 
+              </span>
+            ))
+          }
         </Modal.Header>
         <Modal.Body>
+          <h4>Items:</h4>
           {this.props.order.line_items.map(li =>
             <LineItem lineItem={li} key={li.id} />
           )}

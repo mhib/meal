@@ -34,8 +34,9 @@ describe('<LineItemForm />', () => {
     });
 
     it('sends request', () => {
+      let { name, cost } = state;
       expect(createSpy).to.have.been.calledOnce();
-      expect(createSpy).to.have.been.calledWithMatch(state, order.id);
+      expect(createSpy).to.have.been.calledWithMatch({ name, cost: cost * 100 }, order.id);
     });
   });
 });

@@ -3,5 +3,6 @@ FactoryGirl.define do
     association :user
     association :order
     cost 1234
+    name 'Meal'
   end
 end

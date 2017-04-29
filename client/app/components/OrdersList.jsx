@@ -5,7 +5,7 @@ import './OrdersList.scss';
 import { UserShape, OrderShape } from './shapes';
 
 const OrdersList = ({ orders, currentUser, archived }) => (
-  <ul className="ordersList">
+  <div className="orders-list">
     {orders.map(order =>
       <Order
         key={order.id}
@@ -13,7 +13,7 @@ const OrdersList = ({ orders, currentUser, archived }) => (
         currentUser={currentUser}
         archived={archived} />
     )}
-  </ul>
+  </div>
 );
 
 OrdersList.defaultProps = {

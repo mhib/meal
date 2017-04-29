@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createStore } from 'redux';
 import { ORDERS_CHANNEL, createSubscription } from '../cable';
-import { createOrder, createLineItem } from '../actions/orders';
+import { createOrder, createLineItem, changeOrderStatus } from '../actions/orders';
 import mealApp from '../reducers/index';
 import App from './App';
 import { UserShape, OrderShape } from './shapes';
@@ -34,6 +34,8 @@ export default class AppContainer extends React.Component {
       case 'created_line_item':
         this.store.dispatch(createLineItem(params.line_item));
         break;
+      case 'changed_order_status':
+        this.store.dispatch(changeOrderStatus(params.order))
       default:
     }
   }

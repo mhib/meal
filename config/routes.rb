@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   get '/sign_out' => 'sessions#destroy', as: :sign_out
   get '/archived_orders/:page' => 'orders#archived_page'
   resource :orders, only: [:create, :destroy, :update]
-  resource :line_items, only: [:create, :destroy, :update]
+  resource :line_items, only: [:create, :destroy]
 end
