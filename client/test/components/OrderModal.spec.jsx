@@ -7,6 +7,7 @@ import OrderFactory from 'test/factories/Order'
 import UserFactory from 'test/factories/User'
 import LineItemFactory from 'test/factories/LineItem'
 import OrderModal from 'components/OrderModal';
+import ChangeOrderStatusLink from 'components/ChangeOrderStatusLink';
 
 describe('<OrderModal />', () => {
   const order = OrderFactory.build();
@@ -58,6 +59,29 @@ describe('<OrderModal />', () => {
 
     it('does render form', () => {
       expect(wrapper).to.have.exactly(1).descendants('LineItemForm');
+    });
+  });
+
+  describe('user is an owner', () => {
+    describe('archived', () => {
+      const wrapper = shallow(<OrderModal archived showModal order={order} currentUser={order.owner} closeModal={() => {}} />);
+      it('does not render change status links', () => {
+        expect(wrapper).not.to.have.descendants(ChangeOrderStatusLink);
+      });
+    });
+
+    describe('not archived', () => {
+      const wrapper = shallow(<OrderModal showModal order={order} currentUser={order.owner} closeModal={() => {}} />);
+      it('renders change status links', () => {
+        expect(wrapper).to.have.exactly(3).descendants(ChangeOrderStatusLink);
+      });
+    });
+  });
+  describe('user is not an owner', () => {
+    const otherUser = Object.assign({}, user, { id: user.id + 3 });
+    const wrapper = shallow(<OrderModal showModal order={order} currentUser={otherUser} closeModal={() => {}} />);
+    it('does not render change status links', () => {
+      expect(wrapper).not.to.have.descendants(ChangeOrderStatusLink);
     });
   });
 });

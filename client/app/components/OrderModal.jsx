@@ -65,7 +65,7 @@ export default class OrderModal extends React.Component {
           <Modal.Title>{this.props.order.restaurant}</Modal.Title>
           <OrderStatus status={this.props.order.status} archived={this.props.archived} />
           {
-            !this.props.archived &&
+            !this.props.archived && this.props.order.owner.id === this.props.currentUser.id &&
             (this.state.updating ? '...' :
             without(STATUSES, this.props.order.status).map((status) =>
               <ChangeOrderStatusLink key={status}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import capitalize from 'lodash/capitalize';
 
 const OrderStatus = ({ status, archived }) => (
-  <div className={`order-status ${status}`}>
+  <div className={`order-status ${status}${archived ? '-archived' : ''}`}>
     <p>
       <span className="status-head">
         Status:&nbsp;
