@@ -71,7 +71,7 @@ describe('<OrderModal />', () => {
     });
 
     describe('not archived', () => {
-      const wrapper = shallow(<OrderModal showModal order={order} currentUser={order.owner} closeModal={() => {}} />);
+      const wrapper = shallow(<OrderModal archived={false} showModal order={order} currentUser={order.owner} closeModal={() => {}} />);
       it('renders change status links', () => {
         expect(wrapper).to.have.exactly(3).descendants(ChangeOrderStatusLink);
       });
@@ -79,7 +79,7 @@ describe('<OrderModal />', () => {
   });
   describe('user is not an owner', () => {
     const otherUser = Object.assign({}, user, { id: user.id + 3 });
-    const wrapper = shallow(<OrderModal showModal order={order} currentUser={otherUser} closeModal={() => {}} />);
+    const wrapper = shallow(<OrderModal archived={false} showModal order={order} currentUser={otherUser} closeModal={() => {}} />);
     it('does not render change status links', () => {
       expect(wrapper).not.to.have.descendants(ChangeOrderStatusLink);
     });
