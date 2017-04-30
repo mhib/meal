@@ -21,6 +21,10 @@ describe('<AppContainer />', () => {
   const user = UserFactory.build();
   const shallowWrapper = mount(<AppContainer today={today} archived={archived} current_user={user} archived_page_count={archivedPageCount} />);
 
+  it('renders FiltersList', () => {
+    expect(shallowWrapper).to.have.exactly(1).descendants('FiltersList');
+  });
+
   it('renders OrderForm', () => {
     expect(shallowWrapper).to.have.exactly(1).descendants('OrderForm');
   });

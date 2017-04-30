@@ -4,9 +4,9 @@ import LineItemFactory from './LineItem'
 
 export default new Factory()
   .sequence('id')
+  .sequence('restaurant', (e) => `Restaurant #${e}`)
   .attrs({
     status: 'open',
-    restaurant: 'Restaurant name',
     owner: UserFactory.build(),
     line_items: [LineItemFactory.build()]
   });

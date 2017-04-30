@@ -58,6 +58,23 @@ export default class OrderModal extends React.Component {
     return (lineItems.reduce((mem, li) => mem + li.cost, 0) / 100).toFixed(2);
   }
 
+  statusLinks() {
+    if(!this.props.archived && this.props.order.owner.id === this.props.currentUser.id) {
+      if(this.state.updating) {
+        return '...'
+      } else {
+        return without(STATUSES, this.props.order.status).map((status) =>
+          <ChangeOrderStatusLink key={status}
+                                 order={this.props.order}
+                                 status={status}
+                                 handleClick={this.setUpdating} />
+        )
+      }
+    }
+    return undefined;
+  }
+
+
   render() {
     return (
       <Modal show={this.props.showModal} onHide={this.handleClose}>
@@ -65,14 +82,7 @@ export default class OrderModal extends React.Component {
           <Modal.Title>{this.props.order.restaurant}</Modal.Title>
           <OrderStatus status={this.props.order.status} archived={this.props.archived} />
           {
-            !this.props.archived && this.props.order.owner.id === this.props.currentUser.id &&
-            (this.state.updating ? '...' :
-            without(STATUSES, this.props.order.status).map((status) =>
-              <ChangeOrderStatusLink key={status}
-                                     order={this.props.order}
-                                     status={status}
-                                     handleClick={this.setUpdating} />
-            ))
+            this.statusLinks()
           }
         </Modal.Header>
         <Modal.Body>

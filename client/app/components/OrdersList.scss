@@ -1,6 +1,11 @@
 .orders-list {
   margin: 10px 0;
   padding-left: 0;
+
+  .orders-list-item {
+    margin: 0 0 10px 0;
+  }
+
   .open {
     background-color: $open-color;
   }

@@ -1,0 +1,12 @@
+.filters {
+  text-align: center;
+  margin: 20px 0;
+
+  .filter {
+    border-radius: 5px;
+    display: inline;
+    margin: 0 5px;
+    padding: 6px 12px 10px 12px;
+    @include colors();
+  }
+}

@@ -3,19 +3,12 @@ import OrdersList from '../components/OrdersList';
 
 const mapStateToProps = (state) => (
   {
-    orders: state.orders
-  }
-);
-
-const mapDispatchToProps = (dispatch) => (
-  {
-    onChangeState: (arg) => {}
+    orders: state.orders.filter((order) => state.filters.get(order.status))
   }
 );
 
 const TodayOrders = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(OrdersList);
 
 export default TodayOrders;

@@ -30,7 +30,7 @@ export default class Order extends React.Component {
 
   render() {
     return (
-      <div className={`order-list-item panel panel-default ${this.props.order.status} ${this.props.archived ? 'archived' : ''}`} role="button" onClick={this.showModal}>
+      <div className={`orders-list-item panel panel-default ${this.props.order.status} ${this.props.archived ? 'archived' : ''}`} role="button" onClick={this.showModal}>
         <div className="panel-body">
           {this.props.order.restaurant} by
           {+this.props.order.owner.id === +this.props.currentUser.id ?

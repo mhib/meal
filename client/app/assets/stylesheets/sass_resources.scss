@@ -5,6 +5,24 @@ $ordered-color: #DCFF10;
 $delivered-color: #529946;
 $archived-color: #DDDDDD;
 
+@mixin colors() {
+    &.open {
+      background-color: $open-color;
+    }
+
+    &.finalized {
+      background-color: $finalized-color;
+    }
+
+    &.ordered {
+      background-color: $ordered-color;
+    }
+
+    &.delivered {
+      background-color: $delivered-color;
+    }
+}
+
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_variables";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_mixins";
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap";

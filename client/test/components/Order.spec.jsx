@@ -14,7 +14,7 @@ describe('<Order />', () => {
   const shallowWrapper = shallow(<Order order={order} currentUser={user} archived={false} />);
 
   it('renders order', () => {
-    expect(shallowWrapper).to.have.exactly(1).descendants('.order-list-item');
+    expect(shallowWrapper).to.have.exactly(1).descendants('.orders-list-item');
     expect(shallowWrapper.text()).to.include(order.restaurant);
     expect(shallowWrapper.text()).to.include(`${order.owner.name}`);
   });

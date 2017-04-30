@@ -8,21 +8,7 @@
   margin-right: 5pt;
   padding: 5pt;
   border-radius: 5px;
-  &.open {
-    background-color: $open-color;
-  }
-
-  &.finalized {
-    background-color: $finalized-color;
-  }
-
-  &.ordered {
-    background-color: $ordered-color;
-  }
-
-  &.delivered {
-    background-color: $delivered-color;
-  }
+  @include colors();
 }
 .order-status {
   &.open {
