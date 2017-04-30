@@ -9,7 +9,9 @@ class LineItemsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.json { render json: { error: @line_item.errors.full_messages }, status: :unprocessable_entity }
+        format.json do
+          render json: { error: @line_item.errors.full_messages }, status: :unprocessable_entity
+        end
       end
     end
   end

@@ -1,4 +1,9 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+$open-color: #1FCC00;
+$finalized-color: lighten(#102DCC, 20%);
+$ordered-color: #DCFF10;
+$delivered-color: #529946;
+$archived-color: #DDDDDD;
 
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_variables";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_mixins";

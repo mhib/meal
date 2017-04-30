@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import capitalize from 'lodash/capitalize'
 import { updateOrderStatus } from '../actions/api';
 import { OrderShape } from './shapes';
 
@@ -23,7 +24,7 @@ export default class ChangeOrderStatusLink extends React.Component {
 
   render() {
     return (
-      <a onClick={this.handleSubmit} href="#">{this.props.status}</a>
+      <a className={`order-status-link ${this.props.status}`} onClick={this.handleSubmit} href="#">{capitalize(this.props.status)}!</a>
     );
   }
 }

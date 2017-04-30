@@ -2,3 +2,45 @@
   text-align: right;
   padding: 15px;
 }
+
+.order-status-link {
+  color: black;
+  margin-right: 5pt;
+  padding: 5pt;
+  &.open {
+    background-color: $open-color;
+  }
+
+  &.finalized {
+    background-color: $finalized-color;
+  }
+
+  &.ordered {
+    background-color: $ordered-color;
+  }
+
+  &.delivered {
+    background-color: $delivered-color;
+  }
+}
+.order-status {
+  &.open {
+    color: $open-color;
+  }
+
+  &.finalized {
+    color: $finalized-color;
+  }
+
+  &.ordered {
+    color: $ordered-color;
+  }
+
+  &.delivered {
+    color: $delivered-color;
+  }
+}
+
+.status-head {
+  color: black;
+}

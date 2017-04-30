@@ -1,26 +1,25 @@
 .orders-list {
   margin: 10px 0;
   padding-left: 0;
-}
+  .open {
+    background-color: $open-color;
+  }
 
-.orders-list .open {
-  background-color: lime;
-}
+  .finalized {
+    background-color: $finalized-color;
+  }
 
-.orders-list .finalized {
-  background-color: blue;
-}
+  .ordered {
+    background-color: $ordered-color;
+  }
 
-.orders-list .ordered {
-  background-color: orange;
-}
+  .delivered {
+    background-color: $delivered-color;
+  }
 
-.orders-list .delivered {
-  background-color: green;
-}
-
-.orders-list .archived {
-  background-color: gray;
+  .archived {
+    background-color: $archived-color;
+  }
 }
 
 ul.pagination li {

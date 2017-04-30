@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import bindAll from 'lodash/bindAll';
 import PropTypes from 'prop-types';
+import without from 'lodash/without';
 import LineItemForm from './LineItemForm';
 import LineItem from './LineItem';
 import { OrderShape } from './shapes';
@@ -66,12 +67,11 @@ export default class OrderModal extends React.Component {
           {
             !this.props.archived &&
             (this.state.updating ? '...' :
-            STATUSES.filter((s) => s !== this.props.order.status).map((status) =>
-              <span key={status}>
-                <ChangeOrderStatusLink order={this.props.order}
-                                       status={status}
-                                       handleClick={this.setUpdating} />, 
-              </span>
+            without(STATUSES, this.props.order.status).map((status) =>
+              <ChangeOrderStatusLink key={status}
+                                     order={this.props.order}
+                                     status={status}
+                                     handleClick={this.setUpdating} />
             ))
           }
         </Modal.Header>
