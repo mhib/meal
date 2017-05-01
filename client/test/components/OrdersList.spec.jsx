@@ -14,4 +14,11 @@ describe('<OrdersList />', () => {
   it('lists orders', () => {
     expect(wrapper).to.have.exactly(orderCount).descendants('Order');
   });
+
+  describe('no orders', () => {
+    it('renders no orders info', () => {
+      expect(shallow(<OrdersList orders={[]} currentUser={user} />))
+        .to.include.text('No orders');
+    });
+  });
 });

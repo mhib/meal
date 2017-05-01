@@ -6,13 +6,16 @@ import { UserShape, OrderShape } from './shapes';
 
 const OrdersList = ({ orders, currentUser, archived }) => (
   <div className="orders-list">
-    {orders.map(order =>
-      <Order
-        key={order.id}
-        order={order}
-        currentUser={currentUser}
-        archived={archived} />
-    )}
+  {
+    orders.length === 0 ? <h4>No orders</h4> :
+    orders.map(order =>
+          <Order
+            key={order.id}
+            order={order}
+            currentUser={currentUser}
+            archived={archived} />
+    )
+  }
   </div>
 );
 
