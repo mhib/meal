@@ -13,6 +13,10 @@ class SessionsController < ApplicationController
 
   def destroy
     clear_cookies
-    redirect_to root_path
+    redirect_to signed_out_path
+  end
+
+  def signed_out
+    redirect_to root_path if signed_in?
   end
 end
