@@ -12,7 +12,7 @@ describe('<OrdersList />', () => {
     });
   });
   describe('not archived', () => {
-    const wrapper = shallow(<OrderStatus status="open" />);
+    const wrapper = shallow(<OrderStatus status="open" archived={false} />);
     it('displays status', () => {
       expect(wrapper).to.include.text('Open');
       expect(wrapper).not.to.include.text('Archived');
