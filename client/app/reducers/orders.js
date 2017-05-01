@@ -27,6 +27,16 @@ const changeOrderStatus = (state, action) => {
   return newState;
 };
 
+const deleteLineItem = (state, action) => {
+  const newState = clone(state);
+  const order = newState.find((elem) => elem.id === action.lineItem.order_id);
+  order.line_items.splice(
+    order.line_items.findIndex((li) => li.id === action.lineItem.id),
+    1
+  );
+  return newState;
+};
+
 const orders = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case 'CREATED_ORDER':
@@ -35,6 +45,8 @@ const orders = (state = DEFAULT_STATE, action) => {
       return addLineItem(state, action);
     case 'CHANGED_ORDER_STATUS':
       return changeOrderStatus(state, action);
+    case 'DELETED_LINE_ITEM':
+      return deleteLineItem(state, action);
     default:
       return state;
   }

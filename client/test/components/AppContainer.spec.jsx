@@ -19,7 +19,10 @@ describe('<AppContainer />', () => {
   const archived = OrderFactory.buildList(10);
   const archivedPageCount = 2;
   const user = UserFactory.build();
-  const shallowWrapper = mount(<AppContainer today={today} archived={archived} current_user={user} archived_page_count={archivedPageCount} />);
+  const shallowWrapper = mount(<AppContainer today={today}
+                                             archived={archived}
+                                             current_user={user}
+                                             archived_page_count={archivedPageCount} />);
 
   it('renders FiltersList', () => {
     expect(shallowWrapper).to.have.exactly(1).descendants('FiltersList');
@@ -39,5 +42,5 @@ describe('<AppContainer />', () => {
 
   it('subscribes to websockets', () => {
     expect(subSpy).to.have.been.calledOnce();
-  })
+  });
 });

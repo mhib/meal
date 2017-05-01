@@ -4,6 +4,6 @@ class LineItemPolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.user == user
+    record.user == user && record.order.open? && record.order.today?
   end
 end

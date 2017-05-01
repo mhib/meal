@@ -53,4 +53,52 @@ RSpec.describe "LineItems", type: :request do
       end
     end
   end
+
+  describe 'DELETE /line_items' do
+    describe 'user is owner' do
+      let!(:user) { create(:user) }
+      let!(:line_item) { create(:line_item, user_id: user.id) }
+      let(:server_spy) { double(:server, broadcast: nil) }
+
+      before do
+        allow_any_instance_of(ApplicationController).to receive(:signed_in?) { true }
+        allow_any_instance_of(ApplicationController).to receive(:current_user) { user }
+        allow(ActionCable).to receive(:server) { server_spy }
+      end
+
+      it 'destroys line item' do
+        expect do
+          delete '/line_items.json', params: {line_item: {id: line_item.id}}
+        end.to change { LineItem.count }.by(-1)
+        expect(response).to be_ok
+        expect(server_spy).to have_received(:broadcast).
+          with(
+            'orders:orders',
+            {
+              type: 'deleted_line_item',
+              line_item: LineItemSerializer.new(line_item).as_json
+            }
+        )
+      end
+    end
+
+    describe 'user is not an owner' do
+      let!(:user) { create(:user) }
+      let!(:line_item) { create(:line_item) }
+      let(:server_spy) { double(:server, broadcast: nil) }
+
+      before do
+        allow_any_instance_of(ApplicationController).to receive(:signed_in?) { true }
+        allow_any_instance_of(ApplicationController).to receive(:current_user) { user }
+        allow(ActionCable).to receive(:server) { server_spy }
+      end
+
+      it 'does not destroy line item' do
+        expect do
+          delete '/line_items.json', params: {line_item: {id: line_item.id}}
+        end.to raise_error(Pundit::NotAuthorizedError)
+        expect(server_spy).not_to have_received(:broadcast)
+      end
+    end
+  end
 end

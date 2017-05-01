@@ -1,10 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import proxyquire from 'proxyquire';
-import sinon from 'sinon';
-import OrderFactory from 'test/factories/Order'
-import UserFactory from 'test/factories/User'
+import OrderFactory from 'test/factories/Order';
+import UserFactory from 'test/factories/User';
 import Order from 'components/Order';
 import OrderModal from 'components/OrderModal';
 

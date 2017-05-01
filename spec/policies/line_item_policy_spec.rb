@@ -35,5 +35,29 @@ RSpec.describe LineItemPolicy do
         expect(subject).not_to permit(other_user, line_item)
       end
     end
+
+    context 'order not open' do
+      let(:line_item) { create(:line_item) }
+
+      before do
+        line_item.order.finalized!
+      end
+
+      it 'denies access' do
+        expect(subject).not_to permit(line_item.user, line_item)
+      end
+    end
+
+    context 'order not todays' do
+      let(:line_item) { create(:line_item) }
+
+      before do
+        line_item.order.update_attribute(:created_at, 2.days.ago)
+      end
+
+      it 'denies access' do
+        expect(subject).not_to permit(line_item.user, line_item)
+      end
+    end
   end
 end

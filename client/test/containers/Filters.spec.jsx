@@ -16,7 +16,7 @@ describe('<Filters />', () => {
         filters: new Map([['open', true], ['finalized', true]])
       }
     );
-    wrapper = mount(<Provider store={store}><Filters /></Provider>)
+    wrapper = mount(<Provider store={store}><Filters /></Provider>);
   });
 
   it('lists filters', () => {
@@ -26,7 +26,7 @@ describe('<Filters />', () => {
   describe('toggling filters', () => {
     it('toggles filter', () => {
       const filter = wrapper.find('Filter').first();
-      //filter.find(Checkbox).simulate('change');
+      // filter.find(Checkbox).simulate('change');
       filter.find(Checkbox).props().onChange();
       expect(store.getState().filters.get(filter.props().name)).to.eq(false);
     });

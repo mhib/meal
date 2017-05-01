@@ -23,7 +23,7 @@ describe('<OrderForm />', () => {
 
   describe('Sending create request', () => {
     const state = {
-      restaurant: 'asdf',
+      restaurant: 'asdf'
     };
     before(() => {
       wrapper.setState(state);

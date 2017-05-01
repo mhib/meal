@@ -18,6 +18,9 @@ const devServer = new WebpackDevServer(compiler, {
   quiet:              false,
   noInfo:             false,
   lazy:               false,
+  headers: {
+    'Access-Control-Allow-Origin': '*'
+  },
   stats:              {
     colors:   true,
     hash:     false,
@@ -25,13 +28,13 @@ const devServer = new WebpackDevServer(compiler, {
     chunks:   false,
     children: false
   },
-   watchOptions: {
-      aggregateTimeout: 300,
-      poll: 1000
-    }
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000
+  }
 });
 
-devServer.listen(hotRailsPort, 'localhost', err => {
+devServer.listen(hotRailsPort, '127.0.0.1', err => {
   if (err) console.error(err);
   console.log(
     `=> 🔥  Webpack development server is running on port ${hotRailsPort}`

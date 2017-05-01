@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
-import OrderFactory from 'test/factories/Order'
+import OrderFactory from 'test/factories/Order';
 
 describe('<ChangeOrderStatusLink />', () => {
   const changeSpy = sinon.spy();
@@ -15,10 +15,10 @@ describe('<ChangeOrderStatusLink />', () => {
   }).default;
   const status = 'finalized';
   const order = OrderFactory.build();
-  const wrapper = mount(<ChangeOrderStatusLink order={order} handleClick={handleClickSpy} status={status}/>);
+  const wrapper = mount(<ChangeOrderStatusLink order={order} handleClick={handleClickSpy} status={status} />);
 
   it('renders status', () => {
-    expect(wrapper).to.include.text("Finalized");
+    expect(wrapper).to.include.text('Finalized');
   });
 
   describe('Sending create request', () => {

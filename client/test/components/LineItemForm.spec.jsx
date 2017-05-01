@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
-import OrderFactory from 'test/factories/Order'
+import OrderFactory from 'test/factories/Order';
 
 describe('<LineItemForm />', () => {
   const createSpy = sinon.spy();
@@ -34,7 +34,7 @@ describe('<LineItemForm />', () => {
     });
 
     it('sends request', () => {
-      let { name, cost } = state;
+      const { name, cost } = state;
       expect(createSpy).to.have.been.calledOnce();
       expect(createSpy).to.have.been.calledWithMatch({ name, cost: cost * 100 }, order.id);
     });

@@ -1,10 +1,9 @@
-import orders from 'app/reducers/orders'
+import orders from 'app/reducers/orders';
 import { expect } from 'chai';
 import sample from 'lodash/sample';
-import sinon from 'sinon';
 import cloneDeep from 'lodash/cloneDeep';
 import OrderFactory from 'test/factories/Order';
-import LineItemFactory from 'test/factories/LineItem'
+import LineItemFactory from 'test/factories/LineItem';
 
 describe('orders', () => {
   describe('CREATED_ORDER', () => {
@@ -34,7 +33,7 @@ describe('orders', () => {
       const state = OrderFactory.buildList(10);
       const order = cloneDeep(state[3]);
       order.status = 'finalized';
-      const res = orders(state, { type: 'CHANGED_ORDER_STATUS', order: order });
+      const res = orders(state, { type: 'CHANGED_ORDER_STATUS', order });
       expect(res.find((e) => e.id === order.id).status)
         .to.eq('finalized');
     });
@@ -43,9 +42,23 @@ describe('orders', () => {
       const state = OrderFactory.buildList(10);
       const order = cloneDeep(state[3]);
       order.status = 'finalized';
-      const res = orders(state, { type: 'CHANGED_ORDER_STATUS', order: order });
+      const res = orders(state, { type: 'CHANGED_ORDER_STATUS', order });
       expect(res.findIndex((e) => e.id === order.id))
         .to.eq(state.length - 1);
-    })
+    });
+  });
+
+  describe('DELETED_LINE_ITEM', () => {
+    const state = OrderFactory.buildList(10);
+    const order = state[3];
+    const lineItem = LineItemFactory.build({ order_id: order.id });
+    order.line_items.push(lineItem);
+
+    it('deletes line item', () => {
+      expect(order.line_items.some((e) => e.id === lineItem.id)).to.eq(true);
+      const res = orders(state, { type: 'DELETED_LINE_ITEM', lineItem });
+      const foundOrder = res.find((e) => e.id === order.id);
+      expect(foundOrder.line_items.some((e) => e.id === lineItem.id)).to.eq(false);
+    });
   });
 });

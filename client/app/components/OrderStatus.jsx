@@ -13,7 +13,7 @@ const OrderStatus = ({ status, archived }) => (
   </div>
 );
 
-OrderStatus.proptypes = {
+OrderStatus.propTypes = {
   status: PropTypes.string.isRequired,
   archived: PropTypes.bool.isRequired
 };

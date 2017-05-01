@@ -13,7 +13,7 @@ const FiltersList = ({ filters, onToggle }) => (
   </div>
 );
 
-FiltersList.proptypes = {
+FiltersList.propTypes = {
   filters: PropTypes.instanceOf(Map).isRequired,
   onToggle: PropTypes.func.isRequired
 };

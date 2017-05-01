@@ -3,13 +3,12 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { Checkbox } from 'react-bootstrap';
+import clone from 'lodash/clone';
 import TodayOrders from 'app/containers/TodayOrders';
 import mealApp from 'app/reducers/index';
-import clone from 'lodash/clone';
+import { changeOrderStatus } from 'app/actions/orders';
 import OrderFactory from '../factories/Order';
 import UserFactory from '../factories/User';
-import { changeOrderStatus } from 'app/actions/orders';
 
 describe('<TodayOrders />', () => {
   const user = UserFactory.build();

@@ -4,10 +4,11 @@ class OrdersController < ApplicationController
     authorize @order
     @order.owner = current_user
     if @order.save
+      serialized = serialize(@order)
       ActionCable.server.broadcast('orders:orders', { type: 'created_order',
-                                                      order: serialize(@order) })
+                                                      order: serialized })
       respond_to do |format|
-        format.json { render(json: @order) }
+        format.json { render(json: serialized) }
       end
     else
       respond_to do |format|
@@ -20,10 +21,11 @@ class OrdersController < ApplicationController
     @order = Order.find(update_params[:id])
     authorize(@order)
     if @order.update(update_params)
+      serialized = serialize(@order)
       ActionCable.server.broadcast('orders:orders', { type: 'changed_order_status',
-                                                      order: serialize(@order) })
+                                                      order: serialized })
       respond_to do |format|
-        format.json { render(json: @order) }
+        format.json { render(json: serialized) }
       end
     end
   end

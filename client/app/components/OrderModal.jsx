@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import without from 'lodash/without';
 import LineItemForm from './LineItemForm';
 import LineItem from './LineItem';
-import { OrderShape } from './shapes';
+import { OrderShape, UserShape } from './shapes';
 import ChangeOrderStatusLink from './ChangeOrderStatusLink';
 import OrderStatus from './OrderStatus';
 import './OrderModal.scss';
@@ -17,7 +17,8 @@ export default class OrderModal extends React.Component {
     order: OrderShape.isRequired,
     closeModal: PropTypes.func.isRequired,
     showModal: PropTypes.bool.isRequired,
-    archived: PropTypes.bool.isRequired
+    archived: PropTypes.bool.isRequired,
+    currentUser: UserShape.isRequired
   }
 
   constructor(props) {
@@ -59,17 +60,16 @@ export default class OrderModal extends React.Component {
   }
 
   statusLinks() {
-    if(!this.props.archived && this.props.order.owner.id === this.props.currentUser.id) {
-      if(this.state.updating) {
-        return '...'
-      } else {
-        return without(STATUSES, this.props.order.status).map((status) =>
-          <ChangeOrderStatusLink key={status}
+    if (!this.props.archived && this.props.order.owner.id === this.props.currentUser.id) {
+      if (this.state.updating) {
+        return '...';
+      }
+      return without(STATUSES, this.props.order.status).map((status) =>
+        <ChangeOrderStatusLink key={status}
                                  order={this.props.order}
                                  status={status}
                                  handleClick={this.setUpdating} />
-        )
-      }
+        );
     }
     return undefined;
   }
@@ -88,7 +88,11 @@ export default class OrderModal extends React.Component {
         <Modal.Body>
           <h4>Items:</h4>
           {this.props.order.line_items.map(li =>
-            <LineItem lineItem={li} key={li.id} />
+            <LineItem lineItem={li}
+                      key={li.id}
+                      archived={this.props.archived}
+                      currentUser={this.props.currentUser}
+                      status={this.props.order.status} />
           )}
           <p className="sum-of-costs">
             Sum: {this.state.sumOfItems} PLN

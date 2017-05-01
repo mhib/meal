@@ -8,7 +8,7 @@ import Filter from 'app/components/Filter';
 describe('<Filter />', () => {
   const changeSpy = sinon.spy();
   const name = 'open';
-  const wrapper = shallow(<Filter enabled name={name} onToggle={changeSpy} /> );
+  const wrapper = shallow(<Filter enabled name={name} onToggle={changeSpy} />);
 
   it('rendes checkbox', () => {
     expect(wrapper).to.have.exactly(1).descendants(Checkbox);
@@ -19,6 +19,6 @@ describe('<Filter />', () => {
     it('calls onToggle', () => {
       wrapper.find(Checkbox).simulate('change');
       expect(changeSpy).to.have.been.calledOnce();
-    })
+    });
   });
 });

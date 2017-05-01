@@ -1,6 +1,7 @@
 import clone from 'lodash/clone';
-const DEFAULT_STATE = new Map(['open', 'finalized', 'ordered', 'delivered'].map((o) => (
-  [o, true]
+
+const DEFAULT_STATE = new Map(['open', 'finalized', 'ordered', 'delivered'].map((status) => (
+  [status, true]
 )));
 
 const filters = (state = DEFAULT_STATE, action) => {

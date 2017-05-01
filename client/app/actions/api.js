@@ -5,7 +5,7 @@ const LINE_ITEMS_PATH = '/line_items.json';
 
 const getCSRFToken = (config) => {
   const token = document.querySelector('meta[name="csrf-token"]').content;
-  if(config.headers) {
+  if (config.headers) {
     config.headers['X-CSRF-Token'] = token;
   } else {
     config.headers = { 'X-CSRF-Token': token };
@@ -16,7 +16,7 @@ const getCSRFToken = (config) => {
 axios.interceptors.request.use(getCSRFToken, (error) => Promise.reject(error));
 
 export const createOrder = (restaurant) => (
-  axios.post(ORDERS_PATH, { order: { restaurant: restaurant } })
+  axios.post(ORDERS_PATH, { order: { restaurant } })
 );
 
 export const createLineItem = ({ cost, name }, order_id) => (
@@ -29,5 +29,9 @@ export const getArchivedOrdersPage = (page) => (
 );
 
 export const updateOrderStatus = (status, id) => (
-  axios.patch(`/orders.json`, { order: { status, id } })
+  axios.patch(ORDERS_PATH, { order: { status, id } })
+);
+
+export const deleteLineItem = (line_item) => (
+  axios.delete(LINE_ITEMS_PATH, { data: { line_item } })
 );

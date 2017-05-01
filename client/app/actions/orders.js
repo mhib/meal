@@ -18,3 +18,10 @@ export const createLineItem = (lineItem) => (
     lineItem
   }
 );
+
+export const deleteLineItem = (lineItem) => (
+  {
+    type: 'DELETED_LINE_ITEM',
+    lineItem
+  }
+);

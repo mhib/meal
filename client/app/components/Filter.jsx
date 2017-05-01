@@ -16,7 +16,7 @@ const Filter = ({ onToggle, enabled, name }) => (
 Filter.propTypes = {
   onToggle: React.PropTypes.func.isRequired,
   enabled: React.PropTypes.bool.isRequired,
-  name: React.PropTypes.string.isRequired,
+  name: React.PropTypes.string.isRequired
 };
 
 export default Filter;

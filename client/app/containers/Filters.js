@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch) => (
   {
     onToggle: (name) => dispatch(toggleFilter(name))
   }
-)
+);
 
 const Filters = connect(
   mapStateToProps,

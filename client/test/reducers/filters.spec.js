@@ -1,10 +1,10 @@
-import filters from 'app/reducers/filters'
+import filters from 'app/reducers/filters';
 import { expect } from 'chai';
 
 describe('filters', () => {
   describe('TOGGLED_FILTER', () => {
-    const initialState = new Map(['open', 'finalized', 'ordered', 'delivered'].map((o) => (
-      [o, true]
+    const initialState = new Map(['open', 'finalized', 'ordered', 'delivered'].map((state) => (
+      [state, true]
     )));
     it('toggles filter', () => {
       const res = filters(initialState, { type: 'TOGGLED_FILTER', filterName: 'open' });

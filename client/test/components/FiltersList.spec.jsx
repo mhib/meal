@@ -4,10 +4,10 @@ import { shallow } from 'enzyme';
 import FiltersList from 'app/components/FiltersList';
 
 describe('<FiltersList />', () => {
-  const filters = new Map(['open', 'finalized', 'ordered', 'delivered'].map((o) => (
-      [o, true]
+  const filters = new Map(['open', 'finalized', 'ordered', 'delivered'].map((status) => (
+      [status, true]
     )));
-  const wrapper = shallow(<FiltersList filters={filters} onToggle={() => {}} /> );
+  const wrapper = shallow(<FiltersList filters={filters} onToggle={() => {}} />);
 
   it('lists orders', () => {
     expect(wrapper).to.have.exactly(4).descendants('Filter');
