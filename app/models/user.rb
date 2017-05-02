@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   def self.find_or_create_by_oauth(auth)
     if (found = where(provider: auth[:provider], uid: auth[:uid]).first)
-      found.tap { |f| f.update_name_from_oauth(auth) }
+      found.update_name_from_oauth(auth)
     else
       create!(
         provider: auth[:provider],

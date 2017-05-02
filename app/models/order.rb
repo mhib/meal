@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
-  enum status: %i(open finalized ordered delivered)
+  STATUSES = Hash[%i(open finalized ordered delivered).each_with_index.to_a].freeze
+  enum status: STATUSES
 
   validates :owner, presence: true
   validates :restaurant, presence: true, length: { in: 1..255 }
@@ -12,9 +13,9 @@ class Order < ApplicationRecord
   scope :today, -> { where('created_at >= ?', Time.zone.now.beginning_of_day) }
   scope :not_today, -> { where('created_at < ?', Time.zone.now.beginning_of_day) }
 
+  paginates_per 5
+
   def today?
     created_at >= Time.zone.now.beginning_of_day
   end
-
-  paginates_per 5
 end
