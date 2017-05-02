@@ -7,38 +7,30 @@ class OrdersController < ApplicationController
       serialized = serialize(@order)
       ActionCable.server.broadcast('orders:orders', { type: 'created_order',
                                                       order: serialized })
-      respond_to do |format|
-        format.json { render(json: serialized) }
-      end
+      render json: serialized
     else
-      respond_to do |format|
-        format.json { render json: { error: @order.errors.full_messages } }
-      end
+      render json: { error: @order.errors.full_messages }
     end
   end
 
   def update
     @order = Order.find(update_params[:id])
     authorize(@order)
-    if @order.update(update_params)
-      serialized = serialize(@order)
-      ActionCable.server.broadcast('orders:orders', { type: 'changed_order_status',
-                                                      order: serialized })
-      respond_to do |format|
-        format.json { render(json: serialized) }
-      end
-    end
+    @order.update(update_params)
+    serialized = serialize(@order)
+    ActionCable.server.broadcast('orders:orders', { type: 'changed_order_status',
+                                                    order: serialized })
+    render(json: serialized)
   end
 
   def archived_page
     authorize(:order)
     @not_today_orders = Order.not_today.includes(:owner, line_items: :user).order(:status, created_at: :desc).page(params[:page].to_i)
     @not_today_orders_json = serialize(@not_today_orders.to_a)
-    respond_to do |format|
-      format.json do
-        render json: { orders: @not_today_orders_json, page_count: @not_today_orders.total_pages }
-      end
-    end
+    render json: {
+      orders: @not_today_orders_json,
+      page_count: @not_today_orders.total_pages
+    }
   end
 
   private

@@ -5,15 +5,9 @@ class LineItemsController < ApplicationController
     if @line_item.save
       serialized = serialize(@line_item)
       ActionCable.server.broadcast('orders:orders', { type: 'created_line_item', line_item: serialized })
-      respond_to do |format|
-        format.json { render(json: serialized) }
-      end
+      render json: serialized
     else
-      respond_to do |format|
-        format.json do
-          render json: { error: @line_item.errors.full_messages }, status: :unprocessable_entity
-        end
-      end
+      render json: { error: @line_item.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -22,9 +16,7 @@ class LineItemsController < ApplicationController
     authorize(@line_item)
     @line_item.destroy
     ActionCable.server.broadcast('orders:orders', { type: 'deleted_line_item', line_item: serialize(@line_item) })
-    respond_to do |format|
-      format.json { render json: { deleted: true } }
-    end
+    render json: { deleted: true }
   end
 
   private
