@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "LineItems", type: :request do
-  describe "POST /line_items" do
+RSpec.describe 'LineItems', type: :request do
+  describe 'POST /line_items' do
     context 'user does not already have line item' do
       let!(:user) { create(:user) }
       let!(:order) { create(:order) }
@@ -16,18 +16,16 @@ RSpec.describe "LineItems", type: :request do
 
       it 'creates line item' do
         expect do
-          post '/line_items.json', params: {line_item: line_item_params}
-        end.to change { LineItem.count }.by(1)
+          post '/line_items.json', params: { line_item: line_item_params }
+        end.to change(LineItem, :count).by(1)
         expect(LineItem.last.user).to eq user
         expect(response).to be_ok
-        expect(server_spy).to have_received(:broadcast).
-          with(
+        expect(server_spy).to have_received(:broadcast)
+          .with(
             'orders:orders',
-            {
-              type: 'created_line_item',
-              line_item: LineItemSerializer.new(LineItem.last).as_json
-            }
-        )
+            type: 'created_line_item',
+            line_item: LineItemSerializer.new(LineItem.last).as_json
+          )
       end
     end
 
@@ -46,7 +44,7 @@ RSpec.describe "LineItems", type: :request do
 
       it 'does not create line item' do
         expect do
-          post '/line_items.json', params: {line_item: line_item_params}
+          post '/line_items.json', params: { line_item: line_item_params }
         end.not_to change { LineItem.count }
         expect(response.status).to eq 422
         expect(ActionCable).not_to have_received(:server)
@@ -68,17 +66,15 @@ RSpec.describe "LineItems", type: :request do
 
       it 'destroys line item' do
         expect do
-          delete '/line_items.json', params: {line_item: {id: line_item.id}}
-        end.to change { LineItem.count }.by(-1)
+          delete '/line_items.json', params: { line_item: { id: line_item.id } }
+        end.to change(LineItem, :count).by(-1)
         expect(response).to be_ok
-        expect(server_spy).to have_received(:broadcast).
-          with(
+        expect(server_spy).to have_received(:broadcast)
+          .with(
             'orders:orders',
-            {
-              type: 'deleted_line_item',
-              line_item: LineItemSerializer.new(line_item).as_json
-            }
-        )
+            type: 'deleted_line_item',
+            line_item: LineItemSerializer.new(line_item).as_json
+          )
       end
     end
 
@@ -95,7 +91,7 @@ RSpec.describe "LineItems", type: :request do
 
       it 'does not destroy line item' do
         expect do
-          delete '/line_items.json', params: {line_item: {id: line_item.id}}
+          delete '/line_items.json', params: { line_item: { id: line_item.id } }
         end.to raise_error(Pundit::NotAuthorizedError)
         expect(server_spy).not_to have_received(:broadcast)
       end

@@ -43,7 +43,7 @@ RSpec.describe User, type: :model do
           {
             provider: user.provider,
             uid: user.uid,
-            info: { name: (user.name + "1") }
+            info: { name: (user.name + '1') }
           }
         end
 

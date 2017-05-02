@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "Orders", type: :request do
-  describe "POST /orders.json" do
+RSpec.describe 'Orders', type: :request do
+  describe 'POST /orders.json' do
     context 'user not signed in' do
       let(:order_params) { attributes_for(:order) }
 
@@ -12,7 +12,7 @@ RSpec.describe "Orders", type: :request do
 
       it 'does not allow to create order' do
         expect do
-          post '/orders.json', params: {order: order_params}
+          post '/orders.json', params: { order: order_params }
         end.to raise_error(Pundit::NotAuthorizedError)
       end
     end
@@ -30,20 +30,20 @@ RSpec.describe "Orders", type: :request do
 
       it 'creates order' do
         expect do
-          post '/orders.json', params: {order: order_params}
-        end.to change { Order.count }.by(1)
+          post '/orders.json', params: { order: order_params }
+        end.to change(Order, :count).by(1)
         expect(Order.last.owner).to eq user
         expect(response).to be_ok
-        expect(server_spy).to have_received(:broadcast).
-          with(
+        expect(server_spy).to have_received(:broadcast)
+          .with(
             'orders:orders',
-            {type: 'created_order', order: OrderSerializer.new(Order.last).as_json}
+            type: 'created_order', order: OrderSerializer.new(Order.last).as_json
           )
       end
     end
   end
 
-  describe "PATCH /orders.json" do
+  describe 'PATCH /orders.json' do
     context 'user is owner' do
       let(:user) { create(:user) }
       let(:order) { create(:order, owner: user) }
@@ -57,9 +57,13 @@ RSpec.describe "Orders", type: :request do
 
       it 'updates status' do
         expect do
-          patch '/orders.json', params: {order: {id: order.id, status: :delivered}}
-        end.to change { Order.find(order.id).status.intern }.from(order.status.intern).to(:delivered)
-        expect(server_spy).to have_received(:broadcast).with('orders:orders', { type: 'changed_order_status', order: OrderSerializer.new(Order.last).as_json })
+          patch '/orders.json', params: { order: { id: order.id, status: :delivered } }
+        end.to change { Order.find(order.id).status.intern }
+          .from(order.status.intern).to(:delivered)
+        expect(server_spy).to have_received(:broadcast)
+          .with('orders:orders',
+                type: 'changed_order_status',
+                order: OrderSerializer.new(Order.last).as_json)
         expect(response).to be_ok
       end
     end
@@ -75,13 +79,13 @@ RSpec.describe "Orders", type: :request do
 
       it 'does not update order' do
         expect do
-          patch '/orders.json', params: {order: {id: order.id, status: :delivered}}
+          patch '/orders.json', params: { order: { id: order.id, status: :delivered } }
         end.to raise_error(Pundit::NotAuthorizedError)
       end
     end
   end
 
-  describe "GET /archived_page.json" do
+  describe 'GET /archived_page.json' do
     context 'user signed in' do
       let!(:user) { create(:user) }
       let!(:order) { create(:order, owner: user) }

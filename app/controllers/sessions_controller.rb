@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    auth = request.env["omniauth.auth"]
+    auth = request.env['omniauth.auth']
     user = User.find_or_create_by_oauth(auth)
     sign_in(user)
     redirect_to root_url
