@@ -23,6 +23,9 @@ describe('<AppContainer />', () => {
                                              archived={archived}
                                              current_user={user}
                                              archived_page_count={archivedPageCount} />);
+  it('renders SignOutLink', () => {
+    expect(shallowWrapper).to.have.exactly(1).descendants('SignOutLink');
+  });
 
   it('renders FiltersList', () => {
     expect(shallowWrapper).to.have.exactly(1).descendants('FiltersList');
