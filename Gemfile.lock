@@ -159,6 +159,8 @@ GEM
     omniauth (1.6.1)
       hashie (>= 3.4.6, < 3.6.0)
       rack (>= 1.6.2, < 3)
+    omniauth-facebook (4.0.0)
+      omniauth-oauth2 (~> 1.2)
     omniauth-github (1.2.3)
       omniauth (~> 1.5)
       omniauth-oauth2 (>= 1.4.0, < 2.0)
@@ -296,6 +298,7 @@ DEPENDENCIES
   kaminari
   listen (~> 3.0.5)
   omniauth
+  omniauth-facebook
   omniauth-github
   pry-rails
   puma (~> 3.0)

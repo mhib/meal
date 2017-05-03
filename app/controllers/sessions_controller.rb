@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
   def new
     clear_cookies
-    redirect_to '/auth/github'
   end
 
   def create
