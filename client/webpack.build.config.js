@@ -40,10 +40,6 @@ config.module.loaders.push(
   {
     test:   require.resolve('react'),
     loader: 'imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham'
-  },
-  {
-    test:   require.resolve('jquery-ujs'),
-    loader: 'imports?jQuery=jquery'
   }
 );
 

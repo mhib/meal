@@ -46,10 +46,6 @@ config.module.loaders.push(
   {
     test:    /\.scss$/,
     loaders: ['style', 'css', 'postcss', 'sass', 'sass-resources']
-  },
-  {
-    test:   require.resolve('jquery-ujs'),
-    loader: 'imports?jQuery=jquery'
   }
 );
 
