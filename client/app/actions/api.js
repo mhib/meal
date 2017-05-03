@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const ORDERS_PATH = '/orders';
 const LINE_ITEMS_PATH = '/line_items';
+const ARCHIVED_ORDERS_PATH = '/archived_orders';
 
 const getCSRFToken = (config) => {
   const token = document.querySelector('meta[name="csrf-token"]').content;
@@ -25,7 +26,7 @@ export const createLineItem = ({ cost, name }, order_id) => (
 );
 
 export const getArchivedOrdersPage = (page) => (
-  axios.get(`/archived_orders/${page}`)
+  axios.get(`${ARCHIVED_ORDERS_PATH}/${page}`)
 );
 
 export const updateOrderStatus = (status, id) => (

@@ -3,14 +3,13 @@ import { Modal } from 'react-bootstrap';
 import bindAll from 'lodash/bindAll';
 import PropTypes from 'prop-types';
 import without from 'lodash/without';
+import { STATUSES } from '../reducers/filters';
 import LineItemForm from './LineItemForm';
 import LineItem from './LineItem';
 import { OrderShape, UserShape } from './shapes';
 import ChangeOrderStatusLink from './ChangeOrderStatusLink';
 import OrderStatus from './OrderStatus';
 import './OrderModal.scss';
-
-const STATUSES = ['open', 'finalized', 'ordered', 'delivered'];
 
 export default class OrderModal extends React.Component {
   static propTypes = {
@@ -56,7 +55,7 @@ export default class OrderModal extends React.Component {
   }
 
   sumOfLineItems(lineItems = this.props.order.line_items) {
-    return (lineItems.reduce((mem, li) => mem + li.cost, 0) / 100).toFixed(2);
+    return (lineItems.reduce(((mem, li) => mem + li.cost), 0) / 100).toFixed(2);
   }
 
   statusLinks() {

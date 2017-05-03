@@ -2,9 +2,13 @@ import clone from 'lodash/clone';
 
 const DEFAULT_STATE = [];
 
+const findOrder = (state, action) => (
+  state.find((elem) => elem.id === action.lineItem.order_id)
+);
+
 const addLineItem = (state, action) => {
   const newState = clone(state);
-  const order = newState.find((elem) => elem.id === action.lineItem.order_id);
+  const order = findOrder(newState, action);
   order.line_items.push(action.lineItem);
   return newState;
 };
@@ -29,7 +33,7 @@ const changeOrderStatus = (state, action) => {
 
 const deleteLineItem = (state, action) => {
   const newState = clone(state);
-  const order = newState.find((elem) => elem.id === action.lineItem.order_id);
+  const order = findOrder(newState, action);
   order.line_items.splice(
     order.line_items.findIndex((li) => li.id === action.lineItem.id),
     1

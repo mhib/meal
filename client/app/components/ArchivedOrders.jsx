@@ -22,7 +22,7 @@ export default class ArchivedOrders extends React.Component {
   }
 
   getPage(data) {
-    const number = +data.selected + 1;
+    const number = data.selected + 1;
     getArchivedOrdersPage(number).then((response) => {
       this.setState({
         orders: response.data.orders,

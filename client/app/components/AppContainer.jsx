@@ -45,10 +45,12 @@ export default class AppContainer extends React.Component {
   }
 
   render() {
-    return (<Provider store={this.store}>
-      <App currentUser={this.props.current_user}
-           archivedOrders={this.props.archived}
-           archivedPageCount={this.props.archived_page_count} />
-    </Provider>);
+    return (
+      <Provider store={this.store}>
+        <App currentUser={this.props.current_user}
+             archivedOrders={this.props.archived}
+             archivedPageCount={this.props.archived_page_count} />
+      </Provider>
+    );
   }
 }

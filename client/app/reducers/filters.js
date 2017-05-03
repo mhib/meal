@@ -1,6 +1,7 @@
 import clone from 'lodash/clone';
 
-const DEFAULT_STATE = new Map(['open', 'finalized', 'ordered', 'delivered'].map((status) => (
+export const STATUSES = ['open', 'finalized', 'ordered', 'delivered'];
+export const DEFAULT_STATE = new Map(STATUSES.map((status) => (
   [status, true]
 )));
 
