@@ -2,7 +2,7 @@
   "name": "meal",
   "version": "0.0.1",
   "engines": {
-    "node": "5.10.0",
+    "node": "7.8.0",
     "npm": "3.5.0"
   },
   "scripts": {
