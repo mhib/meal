@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   def archived_page
     authorize(:order)
     @not_today_orders = Order.not_today.includes(:owner, line_items: :user)
-                             .order(:status, created_at: :desc)
+                             .order(created_at: :desc)
                              .page(params[:page].to_i)
     @not_today_orders_json = serialize(@not_today_orders.to_a)
     render json: {
